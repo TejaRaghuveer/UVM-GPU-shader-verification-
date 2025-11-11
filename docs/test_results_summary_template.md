@@ -75,7 +75,7 @@
 
 ---
 
-Author: Teja Raghuveer • GitHub: https://github.com/TejaRaghuveer • LinkedIn: https://www.linkedin.com/in/raghu-veer-856746289/ • Email: tejaraghuveer@gmail.com
+Author: Teja Raghuveer • Aspiring Verification Engineer (GPU/compute) • GitHub: https://github.com/TejaRaghuveer • LinkedIn: https://www.linkedin.com/in/raghu-veer-856746289/ • Email: tejaraghuveer@gmail.com
 
 # Test Results Summary — GPU Shader Core (Template)
 

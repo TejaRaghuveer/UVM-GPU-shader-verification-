@@ -186,6 +186,7 @@ cd UVM_GPU_Shader_Verification
 ## About Me
 Hi, I’m Teja Raghuveer. I built this project to level up my hands‑on verification skills and to show how I approach real hardware problems—methodically, but with curiosity.
 
+- Aspiring Verification Engineer focused on GPU/compute blocks
 - Email: tejaraghuveer@gmail.com
 - GitHub: https://github.com/TejaRaghuveer
 - LinkedIn: https://www.linkedin.com/in/raghu-veer-856746289/
