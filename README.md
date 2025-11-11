@@ -76,3 +76,21 @@ In short: shader cores are fast, parallel math engines; verification ensures the
 - Emphasizes correctness and coverage, aligning with silicon quality and time‑to‑market goals.
 - Shows ability to build end‑to‑end infrastructure: DUT + TB + sequences + scoreboard + coverage + CI.
 - Readable, maintainable code and scripts suitable for collaboration in multi‑site verification teams.
+
+## Test types used in this project
+- Directed tests
+  - Purpose: Prove basic functionality with deterministic, easy-to-debug transactions.
+  - What they look like: Hand-picked inputs and opcodes (e.g., scalar ADD: 1+2=3; vector ADD with simple lane patterns).
+  - Value: Fast bring-up, sanity checks, clear pass/fail, great for regressions after fixes.
+
+- Constrained-random tests
+  - Purpose: Explore a wide input space automatically while keeping inputs legal and meaningful.
+  - What they look like: Randomized opcode selection (ADD/SUB/MUL/MAC), scalar vs vector mode, randomized operands with constraints and distributions.
+  - Value: Finds unexpected interactions and corner behaviors; drives coverage growth (opcode/mode cross, operand ranges).
+
+- Corner-case (edge) tests
+  - Purpose: Stress known risk areas and boundary conditions that break naïve designs.
+  - What they look like: Zero and max values, two’s complement negatives, overflow-prone MUL/MAC patterns, mixed-lane vectors, back-to-back handshakes.
+  - Value: Validates robustness around arithmetic limits, sign behavior, and protocol timing; often reveals subtle bugs missed by random tests.
+
+How they work together: Start with directed tests to validate plumbing and basic math; add corner cases to harden arithmetic and handshakes; use constrained-random to sweep the state space and close coverage.
