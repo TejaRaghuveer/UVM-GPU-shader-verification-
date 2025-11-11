@@ -6,12 +6,12 @@ Project scaffold for GPU Shader UVM verification.
 [![Lint](https://img.shields.io/badge/lint-verible-blue)](https://github.com/TejaRaghuveer/UVM-GPU-shader-verification-/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/badge/coverage-html%20report-blue)](./scripts/coverage_report.ps1)
 
-### Highlights
-- UVM agent/env architecture, scoreboard + golden model, and functional coverage.
-- Directed and constrained‑random sequences for scalar and vector ops.
-- Ready/valid SV interfaces wired to a synthesizable shader-core DUT.
-- Debug hooks (+GPU_DBG) and optional wave dumps (+VCD) for fast triage.
-- Portable run scripts (Questa, VCS, Xcelium) and GitHub Actions CI with artifacts.
+## Highlights
+- UVM agent/env architecture, scoreboard + golden model, and functional coverage
+- Directed and constrained‑random sequences for scalar and vector ops
+- Ready/valid SV interfaces wired to a synthesizable shader-core DUT
+- Debug hooks (+GPU_DBG) and optional wave dumps (+VCD) for fast triage
+- Portable run scripts (Questa, VCS, Xcelium) and GitHub Actions CI with artifacts
 
 ## Project Overview
 Modern experiences—from smooth mobile graphics to reliable AI vision—depend on tiny math engines called shader cores. When these cores get a calculation wrong, people notice: a flickering pixel, a banded shadow, a misclassified object. The real-world problem is trust: users expect what they see (or what a model predicts) to be correct every time. That trust is earned through verification.
@@ -175,11 +175,31 @@ cd UVM_GPU_Shader_Verification
 - `+GPU_DBG`: verbose driver/monitor prints for triage
 - `+UVM_VERBOSITY=UVM_HIGH`: increase UVM log detail
 
+## Repository structure
+```
+UVM_GPU_Shader_Verification/
+  agent/           # sequencer, driver, monitor, agent config
+  coverage/        # functional coverage subscriber
+  docs/            # plan, reflections, diagrams, templates
+  dut/             # interfaces and shader core RTL
+  env/             # environment shell
+  scoreboard/      # golden model and scoreboard
+  sequences/       # directed and random sequences
+  scripts/         # run and coverage scripts + filelist
+  tb/              # package and testbench top
+```
+
 ## Project milestones
 - M1: Testbench bring-up (agent/env, smoke tests passing, waves/logs produced)
 - M2: Scoreboard + golden reference integrated; directed tests green; initial coverage
 - M3: Constrained-random stress added; functional coverage ≥ 70%; CI lint passing
 - M4: Coverage-driven closure (opcode/mode cross 100%, edges covered); regressions green on CI; artifacts archived
+
+## Contributing
+- Issues and ideas: open an Issue with context, expected behavior, and repro steps.
+- Small changes: fork, branch, and submit a PR; include a short rationale.
+- Larger changes: file an Issue first to align scope and design.
+- Style: keep explanations concise, comments meaningful, and formatting consistent.
 
 ---
 
