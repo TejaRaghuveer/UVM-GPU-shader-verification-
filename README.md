@@ -51,3 +51,21 @@ This project aims to be both instructive and practical—small enough to read in
 - Coverage metrics and CI scripts that show measurable progress and catch regressions early.
 
 In short: shader cores are fast, parallel math engines; verification ensures they’re fast and correct. This project shows professional-grade verification practices on a focused, easy-to-understand GPU block.
+
+## Key skills demonstrated
+- UVM architecture: agents (sequencer/driver/monitor), environment, analysis ports, config DB, factory usage.
+- SystemVerilog interfaces and ready/valid protocols for instruction/data/result paths; virtual interface plumbing.
+- Constrained‑random stimulus: scalar/vector sequences, opcode distributions, edge-case and stress testing.
+- Reference modeling and checking: golden model vs DUT in a scoreboard with detailed mismatch reporting.
+- Functional coverage: opcode/mode and operand scenarios; coverage-driven mindset for closure.
+- Debuggability: structured logs (+GPU_DBG), optional waveform dumps (+VCD), and minimal, reproducible testcases.
+- Automation: portable run scripts across simulators (Questa, VCS, Xcelium), coverage report generation.
+- CI integration: GitHub Actions for linting (Verible) and self-hosted regressions with artifact archival.
+- Version control best practices: clean .gitignore, organized repo, consistent commit hygiene.
+
+## Relevance for GPU verification roles
+- Mirrors real GPU/accelerator verification patterns (SIMD lanes, vector ALU ops, handshake timing).
+- Demonstrates scalable UVM patterns that generalize to larger shader ISAs, pipelines, and memory systems.
+- Emphasizes correctness and coverage, aligning with silicon quality and time‑to‑market goals.
+- Shows ability to build end‑to‑end infrastructure: DUT + TB + sequences + scoreboard + coverage + CI.
+- Readable, maintainable code and scripts suitable for collaboration in multi‑site verification teams.
