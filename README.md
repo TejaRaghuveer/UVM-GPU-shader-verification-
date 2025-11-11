@@ -2,6 +2,10 @@
 
 Project scaffold for GPU Shader UVM verification.
 
+[![CI](https://github.com/TejaRaghuveer/UVM-GPU-shader-verification-/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/TejaRaghuveer/UVM-GPU-shader-verification-/actions/workflows/ci.yml)
+[![Lint](https://img.shields.io/badge/lint-verible-blue)](https://github.com/TejaRaghuveer/UVM-GPU-shader-verification-/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/badge/coverage-html%20report-blue)](./scripts/coverage_report.ps1)
+
 ### Highlights (for recruiters)
 - UVM agent/env architecture, scoreboard + golden model, and functional coverage.
 - Directed and constrained‑random sequences for scalar and vector ops.
