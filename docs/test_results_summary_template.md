@@ -1,5 +1,80 @@
 # Test Results Summary — GPU Shader Core (Template)
 
+## 1) Execution Metadata
+- Date/Time:
+- Regression Name / Suite:
+- Simulator / Version:
+- DUT Config: `WIDTH=`, `LANES=`, `OPCODE_W=`
+- Seeds: (range or list)
+- CI Job / Link:
+
+## 2) Overall Results
+- Total tests: 
+- Passed: 
+- Failed: 
+- Skipped (if any): 
+- Pass rate: %
+- Runtime (wall / CPU): 
+
+## 3) Failures
+- Unique failing tests: 
+- Flaky tests observed: 
+- Top N failing tests (by frequency):
+  - Test:  | Fails:  | Notes:
+  - Test:  | Fails:  | Notes:
+  - Test:  | Fails:  | Notes:
+- Common failure signatures:
+  - Signature 1: description / example log line
+  - Signature 2: description / example log line
+
+## 4) Bug Statistics
+- New bugs opened: 
+- Bugs resolved/closed: 
+- Open bug count (by severity):
+  - Critical: 
+  - High: 
+  - Medium: 
+  - Low: 
+- Links to bug tracker queries or lists:
+  - New: 
+  - Open: 
+  - Closed: 
+
+## 5) Functional Themes
+- Areas impacted (e.g., opcode, scalar/vector mode, handshake):
+  - 
+  - 
+- Scoreboard mismatch categories:
+  - Scalar result mismatches: 
+  - Vector lane mismatches: 
+  - Protocol/handshake issues: 
+- Tests/Seeds that improve coverage or reproduce failures:
+  - 
+
+## 6) Coverage Snapshot (Optional)
+- Functional coverage total: %
+  - Opcode bins (ADD/SUB/MUL/MAC): %/%/%/%
+  - Mode bins (scalar/vector): %/%
+  - Cross (opcode × mode): %
+  - Operand edge bins (a_s/b_s zero/max/small): %/%/% | %/%/%
+- Code coverage (if enabled): Line % | Branch % | Toggle %
+  - Notes on exclusions:
+
+## 7) Key Logs and Artifacts
+- Log bundle: path / link
+- Waves: path / link
+- Coverage HTML: path / link
+
+## 8) Conclusions and Next Steps
+- Summary: (Are we on track? Regressions improving?)
+- Immediate actions:
+  - Action — Owner — ETA
+  - Action — Owner — ETA
+- Risks / Watchlist:
+  - 
+
+# Test Results Summary — GPU Shader Core (Template)
+
 ## 1. Execution Metadata
 - Date/Time:
 - Simulator/Version:
