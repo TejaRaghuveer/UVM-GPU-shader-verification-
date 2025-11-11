@@ -190,3 +190,6 @@ Hi, I’m Teja Raghuveer. I built this project to level up my hands‑on verific
 - Email: tejaraghuveer@gmail.com
 - GitHub: https://github.com/TejaRaghuveer
 - LinkedIn: https://www.linkedin.com/in/raghu-veer-856746289/
+
+## Diagrams
+- See `docs/diagrams.md` for block and sequence diagrams (Mermaid) of the shader core and UVM testbench flow.
