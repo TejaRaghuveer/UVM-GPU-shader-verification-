@@ -10,7 +10,20 @@ Project scaffold for GPU Shader UVM verification.
 - Portable run scripts (Questa, VCS, Xcelium) and GitHub Actions CI with artifacts.
 
 ## Project Overview
-The UVM GPU Shader Verification project provides a reusable, industry-style verification environment for a simplified GPU shader core. It demonstrates how to apply the Universal Verification Methodology (UVM) to validate a compute-centric RTL block that performs scalar and vector arithmetic (ADD, SUB, MUL) and multiply-accumulate (MAC) operations. The environment models real-world verification flows with agents, sequences, scoreboards, coverage, and CI integration.
+Modern experiences—from smooth mobile graphics to reliable AI vision—depend on tiny math engines called shader cores. When these cores get a calculation wrong, people notice: a flickering pixel, a banded shadow, a misclassified object. The real-world problem is trust: users expect what they see (or what a model predicts) to be correct every time. That trust is earned through verification.
+
+This project tackles that problem like engineers and detectives. We build a realistic testbench around a shader-like core and ask hard questions:
+- Are the results correct for both single numbers and vectors, across all supported operations?
+- Do we behave correctly when data arrives back‑to‑back or at awkward boundaries?
+- Are we exploring enough of the state space to be confident, not just lucky?
+
+Using UVM, we turn those questions into a systematic process:
+- An agent drives instruction and data handshakes the way real software would.
+- Directed and constrained‑random sequences generate both “happy path” and corner scenarios.
+- A golden reference model acts as the truth source; a scoreboard calls out mismatches with context.
+- Functional coverage shows where we’ve been—and what’s left to explore.
+
+The outcome is a compact, production‑style environment that mirrors how verification is actually done on GPU compute blocks. It emphasizes human problem‑solving (formulating hypotheses, observing behavior, iterating quickly) while giving you industry‑grade scaffolding—so findings are repeatable, measurable, and actionable. In short: fewer surprises in the lab, fewer bugs in the field, and higher confidence in the math that powers modern experiences.
 
 ### Purpose
 - **Exercise a shader-like datapath** through ready/valid instruction and data interfaces, and validate results through a reference model.
