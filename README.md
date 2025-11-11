@@ -180,3 +180,12 @@ cd UVM_GPU_Shader_Verification
 - M2: Scoreboard + golden reference integrated; directed tests green; initial coverage
 - M3: Constrained-random stress added; functional coverage ≥ 70%; CI lint passing
 - M4: Coverage-driven closure (opcode/mode cross 100%, edges covered); regressions green on CI; artifacts archived
+
+---
+
+## About Me
+Hi, I’m Teja Raghuveer. I built this project to level up my hands‑on verification skills and to show how I approach real hardware problems—methodically, but with curiosity.
+
+- Email: tejaraghuveer@gmail.com
+- GitHub: https://github.com/TejaRaghuveer
+- LinkedIn: https://www.linkedin.com/in/raghu-veer-856746289/

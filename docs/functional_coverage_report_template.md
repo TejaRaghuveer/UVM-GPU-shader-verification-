@@ -67,14 +67,17 @@
 - Waveforms (if any):
 - CI job link:
 
-## 9. Signoff Assessment
-- Functional coverage vs goals:
-- Code coverage vs goals:
-- Open issues affecting signoff:
-- Decision: Proceed / Blocked (explain).
+## 9. Signoff Assessment (plain speak)
+- Did we hit what we promised to hit?
+- Any known gaps we’re accepting (and why)?
+- Decision: Proceed / Blocked (explain in one line).
 
 ## 10. Action Items and Owners
 - Item 1 — Owner — ETA
 - Item 2 — Owner — ETA
+
+---
+
+Author: Teja Raghuveer • GitHub: https://github.com/TejaRaghuveer • LinkedIn: https://www.linkedin.com/in/raghu-veer-856746289/ • Email: tejaraghuveer@gmail.com
 
 

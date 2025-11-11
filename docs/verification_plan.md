@@ -1,8 +1,8 @@
 # GPU Shader Core Verification Plan (Template)
 
 ## 1. Overview
-- Purpose: Define goals, scope, and strategy to verify the GPU shader core DUT implementing scalar and vector arithmetic (ADD, SUB, MUL, MAC) with ready/valid handshakes.
-- Objectives:
+- Purpose: Plainly put—make sure the shader core does the math we expect, every time. This plan captures what we’re verifying and how we’ll know we’re done.
+- Objectives (kept practical):
   - Ensure functional correctness vs a golden reference model for all supported operations and modes.
   - Achieve targeted functional and code coverage.
   - Provide repeatable, automated regressions with artifacts (logs, waves, coverage).
@@ -104,13 +104,17 @@
 - Verification report: coverage summary, bug list, signoff checklist.
 
 ## 14. Ownership and Contacts
-- Verification Owner: <Name / Email>
-- Design Owner: <Name / Email>
-- CI/Infrastructure: <Name / Email>
+- Verification Owner: Teja Raghuveer — tejaraghuveer@gmail.com
+- Design Owner: Teja Raghuveer — tejaraghuveer@gmail.com
+- CI/Infrastructure: Teja Raghuveer — tejaraghuveer@gmail.com
 
 ## 15. Appendices
 - A: DUT interface timing diagrams (ready/valid examples).
 - B: Opcode enum and encoding definition.
 - C: Coverage model rationale and exclusions (if any).
+
+---
+
+Author: Teja Raghuveer • GitHub: https://github.com/TejaRaghuveer • LinkedIn: https://www.linkedin.com/in/raghu-veer-856746289/ • Email: tejaraghuveer@gmail.com
 
 
