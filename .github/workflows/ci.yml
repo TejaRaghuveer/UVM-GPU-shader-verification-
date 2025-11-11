@@ -1,0 +1,78 @@
+name: UVM GPU Shader CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint:
+    name: Lint SystemVerilog with Verible
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Verible Linter
+        uses: chipsalliance/verible-linter-action@main
+        with:
+          paths: |
+            UVM_GPU_Shader_Verification/**/*.sv
+            UVM_GPU_Shader_Verification/**/*.svh
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  simulate:
+    name: Simulate and archive artifacts (requires EDA tools)
+    # Configure a self-hosted runner with your simulator installed and add the 'eda' label.
+    # Alternatively, change to 'windows-latest' if your environment provides the tools on GitHub-hosted runners.
+    runs-on: [ self-hosted, windows, eda ]
+    strategy:
+      fail-fast: false
+      matrix:
+        tool: [ "questa" ]
+        test: [ "gpu_base_test", "gpu_mixed_seq", "gpu_random_stress_seq" ]
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: UVM_GPU_Shader_Verification
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run simulation (${{ matrix.tool }} - ${{ matrix.test }})
+        run: |
+          ./scripts/run_uvm.ps1 -tool ${{ matrix.tool }} -test ${{ matrix.test }} -waves -cov -outdir out_ci_${{ matrix.tool }}_${{ matrix.test }}
+
+      - name: Generate coverage report (${{ matrix.tool }})
+        run: |
+          ./scripts/coverage_report.ps1 -tool ${{ matrix.tool }} -workdir . -outdir cov_report_${{ matrix.tool }}_${{ matrix.test }}
+
+      - name: Archive simulation logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ matrix.tool }}-${{ matrix.test }}
+          path: |
+            UVM_GPU_Shader_Verification/out_ci_${{ matrix.tool }}_${{ matrix.test }}/**/*.log
+            UVM_GPU_Shader_Verification/out_ci_${{ matrix.tool }}_${{ matrix.test }}/**/*.txt
+          if-no-files-found: warn
+
+      - name: Archive waves
+        uses: actions/upload-artifact@v4
+        with:
+          name: waves-${{ matrix.tool }}-${{ matrix.test }}
+          path: |
+            UVM_GPU_Shader_Verification/out_ci_${{ matrix.tool }}_${{ matrix.test }}/**/*.vcd
+            UVM_GPU_Shader_Verification/out_ci_${{ matrix.tool }}_${{ matrix.test }}/**/*.fsdb
+            UVM_GPU_Shader_Verification/out_ci_${{ matrix.tool }}_${{ matrix.test }}/**/*.vpd
+            UVM_GPU_Shader_Verification/out_ci_${{ matrix.tool }}_${{ matrix.test }}/**/*.wlf
+          if-no-files-found: warn
+
+      - name: Archive coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.tool }}-${{ matrix.test }}
+          path: |
+            UVM_GPU_Shader_Verification/cov_report_${{ matrix.tool }}_${{ matrix.test }}/**
+          if-no-files-found: warn
+
+
