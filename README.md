@@ -94,3 +94,53 @@ In short: shader cores are fast, parallel math engines; verification ensures the
   - Value: Validates robustness around arithmetic limits, sign behavior, and protocol timing; often reveals subtle bugs missed by random tests.
 
 How they work together: Start with directed tests to validate plumbing and basic math; add corner cases to harden arithmetic and handshakes; use constrained-random to sweep the state space and close coverage.
+
+## Tools
+- Simulators: Questa, VCS, Xcelium (supported via `scripts/run_uvm.ps1`)
+- Language/Meth: SystemVerilog + UVM (UVM library required by your simulator)
+- Lint: Verible (via GitHub Actions)
+- CI: GitHub Actions (lint on Ubuntu; simulation on self-hosted EDA runner)
+- Scripting: PowerShell 7+ (for cross-platform PS; Windows PowerShell works on Windows)
+- Version control: Git
+
+## Environment setup
+1) Prerequisites
+- Install your simulator (Questa, VCS, or Xcelium) and ensure its binaries are on PATH.
+- Install PowerShell 7+ (recommended) or use Windows PowerShell.
+- Ensure Git is installed and configured.
+
+2) Clone
+```bash
+git clone <your-repo-url>
+cd UVM_GPU_Shader_Verification
+```
+
+3) Build and run (examples)
+- Questa (waves + coverage):
+```powershell
+./scripts/run_uvm.ps1 -tool questa -test gpu_base_test -waves -cov -outdir out_questa
+```
+- VCS:
+```powershell
+./scripts/run_uvm.ps1 -tool vcs -test gpu_mixed_seq -waves -cov -outdir out_vcs
+```
+- Xcelium:
+```powershell
+./scripts/run_uvm.ps1 -tool xrun -test gpu_random_stress_seq -waves -cov -outdir out_xrun
+```
+
+4) Coverage report
+```powershell
+./scripts/coverage_report.ps1 -tool questa -workdir . -outdir cov_report
+```
+
+5) Useful plusargs
+- `+VCD`: enable VCD dump in `tb/top.sv` (waves.vcd)
+- `+GPU_DBG`: verbose driver/monitor prints for triage
+- `+UVM_VERBOSITY=UVM_HIGH`: increase UVM log detail
+
+## Project milestones
+- M1: Testbench bring-up (agent/env, smoke tests passing, waves/logs produced)
+- M2: Scoreboard + golden reference integrated; directed tests green; initial coverage
+- M3: Constrained-random stress added; functional coverage ≥ 70%; CI lint passing
+- M4: Coverage-driven closure (opcode/mode cross 100%, edges covered); regressions green on CI; artifacts archived
