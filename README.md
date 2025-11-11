@@ -2,6 +2,13 @@
 
 Project scaffold for GPU Shader UVM verification.
 
+### Highlights (for recruiters)
+- UVM agent/env architecture, scoreboard + golden model, and functional coverage.
+- Directed and constrained‑random sequences for scalar and vector ops.
+- Ready/valid SV interfaces wired to a synthesizable shader-core DUT.
+- Debug hooks (+GPU_DBG) and optional wave dumps (+VCD) for fast triage.
+- Portable run scripts (Questa, VCS, Xcelium) and GitHub Actions CI with artifacts.
+
 ## Project Overview
 The UVM GPU Shader Verification project provides a reusable, industry-style verification environment for a simplified GPU shader core. It demonstrates how to apply the Universal Verification Methodology (UVM) to validate a compute-centric RTL block that performs scalar and vector arithmetic (ADD, SUB, MUL) and multiply-accumulate (MAC) operations. The environment models real-world verification flows with agents, sequences, scoreboards, coverage, and CI integration.
 
