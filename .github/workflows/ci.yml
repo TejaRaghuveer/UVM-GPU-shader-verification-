@@ -25,11 +25,11 @@ jobs:
     name: Simulate and archive artifacts (requires EDA tools)
     # Configure a self-hosted runner with your simulator installed and add the 'eda' label.
     # Alternatively, change to 'windows-latest' if your environment provides the tools on GitHub-hosted runners.
-    runs-on: [ self-hosted, windows, eda ]
+    runs-on: [ self-hosted, eda ]
     strategy:
       fail-fast: false
       matrix:
-        tool: [ "questa" ]
+        tool: [ "questa", "vcs", "xrun" ]
         test: [ "gpu_base_test", "gpu_mixed_seq", "gpu_random_stress_seq" ]
     defaults:
       run:
