@@ -6,7 +6,7 @@ Project scaffold for GPU Shader UVM verification.
 [![Lint](https://img.shields.io/badge/lint-verible-blue)](https://github.com/TejaRaghuveer/UVM-GPU-shader-verification-/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/badge/coverage-html%20report-blue)](./scripts/coverage_report.ps1)
 
-### Highlights (for recruiters)
+### Highlights
 - UVM agent/env architecture, scoreboard + golden model, and functional coverage.
 - Directed and constrained‑random sequences for scalar and vector ops.
 - Ready/valid SV interfaces wired to a synthesizable shader-core DUT.
@@ -56,13 +56,13 @@ The outcome is a compact, production‑style environment that mirrors how verifi
 
 This project aims to be both instructive and practical—small enough to read in one sitting, yet faithful to patterns used in production verification of compute blocks.
 
-## GPU shader core basics (in plain English)
+## GPU shader core basics
 - What it is: A shader core is the “math engine” inside a GPU that runs many tiny programs (shaders) in parallel. These programs transform inputs (like vertices, pixels, or tensors) into outputs (like colors, lighting, or intermediate features for AI).
 - What it does: Performs lots of arithmetic fast—adds, subtracts, multiplies, and multiply-accumulates—often on vectors (multiple numbers at once) instead of single values.
 - How it runs: Uses a stream of instructions and data; processes them in parallel “lanes” (SIMD). This lets GPUs handle graphics and compute workloads efficiently.
 - Why it’s special: High parallelism and tight timing make it extremely fast, but also sensitive to subtle bugs in control, math precision, and sequencing.
 
-## Why verification matters (for recruiters)
+## Why verification matters
 - Quality risk: A tiny arithmetic or control bug can show up as visual glitches, wrong AI results, or system crashes at scale. Finding these late is expensive.
 - Complexity: Parallel lanes, vector data, and tight handshakes (ready/valid protocols) create many edge cases. Human review alone won’t catch them.
 - Confidence: A good verification environment checks correctness automatically against a “golden” reference model, not just whether the design runs.
