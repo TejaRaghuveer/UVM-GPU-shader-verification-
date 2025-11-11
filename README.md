@@ -90,6 +90,25 @@ In short: shader cores are fast, parallel math engines; verification ensures the
 - Shows ability to build end‑to‑end infrastructure: DUT + TB + sequences + scoreboard + coverage + CI.
 - Readable, maintainable code and scripts suitable for collaboration in multi‑site verification teams.
 
+## How the UVM testbench works (in plain language)
+Think of the testbench as a small team with clear roles:
+- The sequencer is the planner. It decides which operations to try next—sometimes simple, sometimes surprising—to learn how the shader behaves.
+- The driver is the doer. It speaks the DUT’s “ready/valid” language and feeds instructions and data at the right moments, just like real software would.
+- The monitor is the note‑taker. It watches what comes out of the DUT and records the results faithfully, cycle after cycle.
+- The scoreboard is the fact‑checker. It asks a simple question: “Given what we asked for, is this the answer we expected?” It compares against a trusted reference model and flags anything off.
+- Coverage is our map. It shows where we’ve been (opcodes, modes, edge values) and points to the unexplored areas. If a bin is empty, we steer stimulus there.
+
+Together, this team gives us a tight loop: try something, observe carefully, check honestly, learn what to try next.
+
+## Our verification playbook (what we actually do)
+- Start small with directed tests. Prove the plumbing works and that basic math checks out. Quick wins, fast feedback.
+- Turn on constrained‑random. Let the testbench explore combinations we wouldn’t think of by hand, but keep it legal and meaningful with constraints.
+- Stress the corners. Zeros, max values, negative numbers, back‑to‑back handshakes—places where real bugs like to hide.
+- Measure coverage. If a feature or scenario isn’t exercised, we add or adjust sequences until it is.
+- Keep it repeatable. Scripts run the same way on your laptop and on CI. Logs, waves, and coverage reports are saved so issues are easy to reproduce.
+
+The result is a practical, human‑friendly process: we ask good questions, we observe the DUT honestly, and we iterate until the important cases are covered and the scoreboard stays quiet.
+
 ## Test types used in this project
 - Directed tests
   - Purpose: Prove basic functionality with deterministic, easy-to-debug transactions.
