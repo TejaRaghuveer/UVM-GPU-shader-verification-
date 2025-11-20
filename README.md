@@ -180,9 +180,14 @@ cd UVM_GPU_Shader_Verification
 ```powershell
 ./scripts/run_uvm.ps1 -tool questa -test gpu_vector_lane_test -outdir out_vector
 ```
-- MAC stress:
+  - MAC stress:
 ```powershell
 ./scripts/run_uvm.ps1 -tool questa -test gpu_mac_stress_test -outdir out_mac
+```
+- Add extra plusargs (verbosity, debug, cfg trace):
+```powershell
+./scripts/run_uvm.ps1 -tool questa -test gpu_handshake_test `
+  -extra "+UVM_VERBOSITY=UVM_HIGH +GPU_DBG +PRINT_TOPO +UVM_CFG_TRACE"
 ```
 
 4) Coverage report

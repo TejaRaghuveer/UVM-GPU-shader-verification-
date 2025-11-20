@@ -46,12 +46,23 @@ module tb_top;
     rst_n = 1'b1;
   end
 
-  // Optional VCD waveform dump (+VCD)
+  // Optional waveform dumps (+VCD, +WLF, +FSDB)
   initial begin
     if ($test$plusargs("VCD")) begin
       $dumpfile("waves.vcd");
       $dumpvars(0, tb_top);
     end
+`ifdef DUMP_WLF
+    if ($test$plusargs("WLF")) begin
+      $wlfdumpvars;
+    end
+`endif
+`ifdef DUMP_FSDB
+    if ($test$plusargs("FSDB")) begin
+      $fsdbDumpfile("waves.fsdb");
+      $fsdbDumpvars(0, tb_top);
+    end
+`endif
   end
 
   task automatic bind_agent_vifs(string agent_path);

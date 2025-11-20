@@ -6,7 +6,8 @@ Param(
   [switch]$waves,
   [switch]$cov,
   [switch]$gui,
-  [string]$outdir = "out"
+  [string]$outdir = "out",
+  [string]$extra = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,6 +17,7 @@ $filelist = "scripts/filelist.f"
 $plusargs = "+UVM_TESTNAME=$test +UVM_VERBOSITY=$uvm_verb"
 if ($seed -ne "random") { $plusargs = "$plusargs +ntb_random_seed=$seed" }
 if ($waves) { $plusargs = "$plusargs +VCD=1 +GPU_DBG=1" } else { $plusargs = "$plusargs +GPU_DBG=1" }
+if ($extra -ne "") { $plusargs = "$plusargs $extra" }
 
 switch ($tool) {
   "questa" {
