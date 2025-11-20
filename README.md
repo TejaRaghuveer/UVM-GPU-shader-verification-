@@ -139,6 +139,14 @@ How they work together: Start with directed tests to validate plumbing and basic
 - Scripting: PowerShell 7+ (for cross-platform PS; Windows PowerShell works on Windows)
 - Version control: Git
 
+### Portable script best practices (built into `run_uvm.ps1`)
+- Single entry script with `-tool {questa|vcs|xrun}` switch; same flags locally and in CI
+- Simulator-agnostic filelist (`scripts/filelist.f`) shared across tools
+- `-extra` flag to pass custom plusargs (`+UVM_VERBOSITY`, `+PRINT_TOPO`, etc.) without editing code
+- Logs/waves/coverage all land under `-outdir` for easy artifact upload
+- Common seed handling via `+ntb_random_seed` so regressions stay reproducible
+- Optional waveform (`-waves`) and coverage (`-cov`) flags mapped to each tool’s syntax
+
 ## Environment setup
 1) Prerequisites
 - Install your simulator (Questa, VCS, or Xcelium) and ensure its binaries are on PATH.

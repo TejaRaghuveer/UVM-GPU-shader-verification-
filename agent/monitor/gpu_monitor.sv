@@ -20,6 +20,10 @@ class gpu_monitor extends uvm_component;
     if (cfg.instr_vif == null || cfg.data_vif == null || cfg.result_vif == null) begin
       `uvm_fatal(get_type_name(), "one or more virtual interfaces not set in cfg")
     end
+    `uvm_info(get_type_name(),
+              $sformatf("Monitor got instr_vif=%p data_vif=%p result_vif=%p",
+                        cfg.instr_vif, cfg.data_vif, cfg.result_vif),
+              UVM_MEDIUM)
   endfunction
 
   task run_phase(uvm_phase phase);
