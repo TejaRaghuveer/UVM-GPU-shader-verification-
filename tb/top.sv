@@ -90,6 +90,13 @@ module tb_top;
       uvm_root::get().print_config(1);
     end
 
-    run_test("gpu_base_test");
+    string testname;
+    if (!uvm_cmdline_processor::get_inst().get_arg_value("+UVM_TESTNAME=", testname)) begin
+      testname = "gpu_base_test";
+    end
+    `uvm_info("TB_TOP",
+              $sformatf("Running test: %s", testname),
+              UVM_LOW)
+    run_test(testname);
   end
 endmodule: tb_top
