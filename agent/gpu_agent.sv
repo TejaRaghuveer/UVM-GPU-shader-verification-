@@ -19,13 +19,24 @@ class gpu_agent extends uvm_agent;
       cfg = gpu_agent_config::type_id::create("cfg");
     end
 
-    // Pull VIFs from testbench config_db and store into cfg
-    void'(uvm_config_db#(virtual shader_instr_if)::get(this, "", "instr_vif", cfg.instr_vif));
-    void'(uvm_config_db#(virtual shader_data_if )::get(this, "", "data_vif",  cfg.data_vif));
-    void'(uvm_config_db#(virtual shader_result_if)::get(this, "", "result_vif", cfg.result_vif));
+    if (!uvm_config_db#(virtual shader_instr_if)::get(this, "", "instr_vif", cfg.instr_vif))
+      `uvm_fatal(get_type_name(), "instr_vif not set. Check config_db path.")
+    if (!uvm_config_db#(virtual shader_data_if)::get(this, "", "data_vif", cfg.data_vif))
+      `uvm_fatal(get_type_name(), "data_vif not set. Check config_db path.")
+    if (!uvm_config_db#(virtual shader_result_if)::get(this, "", "result_vif", cfg.result_vif))
+      `uvm_fatal(get_type_name(), "result_vif not set. Check config_db path.")
+    `uvm_info(get_type_name(),
+              $sformatf("Agent cfg: instr=%p data=%p result=%p",
+                        cfg.instr_vif, cfg.data_vif, cfg.result_vif),
+              UVM_LOW)
 
     // Make cfg available to children
     uvm_config_db#(gpu_agent_config)::set(this, "*", "cfg", cfg);
+
+    `uvm_info(get_type_name(),
+              $sformatf("Agent cfg: instr_vif=%p data_vif=%p result_vif=%p",
+                        cfg.instr_vif, cfg.data_vif, cfg.result_vif),
+              UVM_MEDIUM)
 
     // Components
     if (cfg.is_active == UVM_ACTIVE) begin

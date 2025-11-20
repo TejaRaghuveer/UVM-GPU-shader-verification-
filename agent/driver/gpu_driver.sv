@@ -16,6 +16,10 @@ class gpu_driver extends uvm_driver#(gpu_seq_item);
     if (cfg.instr_vif == null || cfg.data_vif == null) begin
       `uvm_fatal(get_type_name(), "virtual interfaces not set in cfg")
     end
+    `uvm_info(get_type_name(),
+              $sformatf("Driver got instr_vif=%p data_vif=%p",
+                        cfg.instr_vif, cfg.data_vif),
+              UVM_MEDIUM)
   endfunction
 
   task run_phase(uvm_phase phase);

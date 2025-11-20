@@ -54,11 +54,30 @@ module tb_top;
     end
   end
 
+  task automatic bind_agent_vifs(string agent_path);
+    uvm_config_db#(virtual shader_instr_if)::set(null, agent_path, "instr_vif", instr_if);
+    uvm_config_db#(virtual shader_data_if )::set(null, agent_path, "data_vif",  data_if);
+    uvm_config_db#(virtual shader_result_if)::set(null, agent_path, "result_vif", result_if);
+    `uvm_info("CFG_BIND",
+              $sformatf("Bound VIFs to %s instr=%p data=%p result=%p",
+                        agent_path, instr_if, data_if, result_if),
+              UVM_LOW)
+  endtask
+
   initial begin
-    // Publish virtual interfaces for UVM environment/agents
-    uvm_config_db#(virtual shader_instr_if)::set(null, "*", "instr_vif", instr_if);
-    uvm_config_db#(virtual shader_data_if )::set(null, "*", "data_vif",  data_if);
-    uvm_config_db#(virtual shader_result_if)::set(null, "*", "result_vif", result_if);
+    bind_agent_vifs("uvm_test_top.env_h.agent_h");
+
+    if ($test$plusargs("PRINT_TOPO")) begin
+      #1;
+      uvm_root::get().print_topology();
+    end
+    if ($test$plusargs("PRINT_CONFIG")) begin
+      #1;
+      uvm_root::get().print_config();
+    end
+    if ($test$plusargs("UVM_CFG_TRACE")) begin
+      uvm_root::get().print_config(1);
+    end
 
     run_test("gpu_base_test");
   end
