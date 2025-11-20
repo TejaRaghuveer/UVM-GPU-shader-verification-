@@ -168,6 +168,22 @@ cd UVM_GPU_Shader_Verification
 ```powershell
 ./scripts/run_uvm.ps1 -tool questa -test gpu_handshake_test -waves -cov -outdir out_hshake
 ```
+- Opcode/mode sweep:
+```powershell
+./scripts/run_uvm.ps1 -tool questa -test gpu_opcode_mode_test -outdir out_opmode
+```
+- Scalar edges:
+```powershell
+./scripts/run_uvm.ps1 -tool questa -test gpu_scalar_edge_test -outdir out_scalar
+```
+- Vector lanes:
+```powershell
+./scripts/run_uvm.ps1 -tool questa -test gpu_vector_lane_test -outdir out_vector
+```
+- MAC stress:
+```powershell
+./scripts/run_uvm.ps1 -tool questa -test gpu_mac_stress_test -outdir out_mac
+```
 
 4) Coverage report
 ```powershell

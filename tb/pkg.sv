@@ -27,6 +27,10 @@ package gpu_shader_tb_pkg;
   `include "sequences/gpu_edge_cases_seq.sv"
   `include "sequences/gpu_random_stress_seq.sv"
   `include "sequences/gpu_handshake_seq.sv"
+  `include "sequences/gpu_opcode_mode_seq.sv"
+  `include "sequences/gpu_scalar_edge_seq.sv"
+  `include "sequences/gpu_vector_lane_seq.sv"
+  `include "sequences/gpu_mac_stress_seq.sv"
   `include "sequences/gpu_ready_valid_seq.sv"
 
   // Basic test skeleton
@@ -63,6 +67,50 @@ package gpu_shader_tb_pkg;
       phase.drop_objection(this);
     endtask
   endclass: gpu_handshake_test
+
+  class gpu_opcode_mode_test extends gpu_base_test;
+    `uvm_component_utils(gpu_opcode_mode_test)
+    task run_phase(uvm_phase phase);
+      super.run_phase(phase);
+      phase.raise_objection(this);
+      gpu_opcode_mode_seq seq = gpu_opcode_mode_seq::type_id::create("opcode_mode_seq");
+      seq.start(env_h.agent_h.sqr_h);
+      phase.drop_objection(this);
+    endtask
+  endclass: gpu_opcode_mode_test
+
+  class gpu_scalar_edge_test extends gpu_base_test;
+    `uvm_component_utils(gpu_scalar_edge_test)
+    task run_phase(uvm_phase phase);
+      super.run_phase(phase);
+      phase.raise_objection(this);
+      gpu_scalar_edge_seq seq = gpu_scalar_edge_seq::type_id::create("scalar_edge_seq");
+      seq.start(env_h.agent_h.sqr_h);
+      phase.drop_objection(this);
+    endtask
+  endclass: gpu_scalar_edge_test
+
+  class gpu_vector_lane_test extends gpu_base_test;
+    `uvm_component_utils(gpu_vector_lane_test)
+    task run_phase(uvm_phase phase);
+      super.run_phase(phase);
+      phase.raise_objection(this);
+      gpu_vector_lane_seq seq = gpu_vector_lane_seq::type_id::create("vector_lane_seq");
+      seq.start(env_h.agent_h.sqr_h);
+      phase.drop_objection(this);
+    endtask
+  endclass: gpu_vector_lane_test
+
+  class gpu_mac_stress_test extends gpu_base_test;
+    `uvm_component_utils(gpu_mac_stress_test)
+    task run_phase(uvm_phase phase);
+      super.run_phase(phase);
+      phase.raise_objection(this);
+      gpu_mac_stress_seq seq = gpu_mac_stress_seq::type_id::create("mac_stress_seq");
+      seq.start(env_h.agent_h.sqr_h);
+      phase.drop_objection(this);
+    endtask
+  endclass: gpu_mac_stress_test
 
 endpackage: gpu_shader_tb_pkg
 
