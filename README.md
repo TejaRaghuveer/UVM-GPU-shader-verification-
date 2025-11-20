@@ -164,6 +164,10 @@ cd UVM_GPU_Shader_Verification
 ```powershell
 ./scripts/run_uvm.ps1 -tool xrun -test gpu_random_stress_seq -waves -cov -outdir out_xrun
 ```
+- Handshake stress:
+```powershell
+./scripts/run_uvm.ps1 -tool questa -test gpu_handshake_test -waves -cov -outdir out_hshake
+```
 
 4) Coverage report
 ```powershell

@@ -26,6 +26,8 @@ package gpu_shader_tb_pkg;
   `include "sequences/gpu_directed_smoke_seq.sv"
   `include "sequences/gpu_edge_cases_seq.sv"
   `include "sequences/gpu_random_stress_seq.sv"
+  `include "sequences/gpu_handshake_seq.sv"
+  `include "sequences/gpu_ready_valid_seq.sv"
 
   // Basic test skeleton
   class gpu_base_test extends uvm_test;
@@ -49,6 +51,18 @@ package gpu_shader_tb_pkg;
       phase.drop_objection(this);
     endtask
   endclass: gpu_base_test
+
+  class gpu_handshake_test extends gpu_base_test;
+    `uvm_component_utils(gpu_handshake_test)
+
+    task run_phase(uvm_phase phase);
+      super.run_phase(phase);
+      phase.raise_objection(this);
+      gpu_handshake_seq seq = gpu_handshake_seq::type_id::create("handshake_seq");
+      seq.start(env_h.agent_h.sqr_h);
+      phase.drop_objection(this);
+    endtask
+  endclass: gpu_handshake_test
 
 endpackage: gpu_shader_tb_pkg
 

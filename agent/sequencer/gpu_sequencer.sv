@@ -15,4 +15,8 @@ class gpu_sequencer extends uvm_sequencer#(gpu_seq_item);
       `uvm_warning(get_type_name(), "gpu_agent_config not found in sequencer; proceeding with defaults")
     end
   endfunction
+
+  function gpu_agent_config get_cfg();
+    return cfg;
+  endfunction
 endclass: gpu_sequencer
