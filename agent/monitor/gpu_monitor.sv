@@ -3,10 +3,8 @@ class gpu_monitor extends uvm_component;
   `uvm_component_utils(gpu_monitor)
 
   gpu_agent_config cfg;
-  uvm_analysis_port#(gpu_seq_item) ap;
-
-  // FIFO to correlate requests to results
-  gpu_seq_item req_q[$];
+  uvm_analysis_port#(gpu_seq_item) req_ap;
+  uvm_analysis_port#(gpu_seq_item) rsp_ap;
 
   function new(string name, uvm_component parent);
     super.new(name,parent);
@@ -14,7 +12,8 @@ class gpu_monitor extends uvm_component;
 
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    ap = new("ap", this);
+    req_ap = new("req_ap", this);
+    rsp_ap = new("rsp_ap", this);
     if (!uvm_config_db#(gpu_agent_config)::get(this, "", "cfg", cfg)) begin
       `uvm_fatal(get_type_name(), "gpu_agent_config not found via config_db")
     end
@@ -31,7 +30,7 @@ class gpu_monitor extends uvm_component;
     join
   endtask
 
-  // Capture instruction+operands when both instr/data handshakes complete
+  // Publish instruction+operand transactions when both instr/data handshakes complete
   task sample_requests();
     forever begin
       @(posedge cfg.instr_vif.clk);
@@ -48,34 +47,28 @@ class gpu_monitor extends uvm_component;
           it.a_v = cfg.data_vif.a_v;
           it.b_v = cfg.data_vif.b_v;
           it.c_v = cfg.data_vif.c_v;
-          req_q.push_back(it);
+          req_ap.write(it);
         end
       end
     end
   endtask
 
-  // Capture results and pair with oldest pending request
+  // Publish result observations when DUT returns data
   task sample_results();
     forever begin
       @(posedge cfg.result_vif.clk);
       if (cfg.result_vif.rst_n) begin
         if (cfg.result_vif.valid && cfg.result_vif.ready) begin
-          gpu_seq_item it;
-          if (req_q.size() > 0) begin
-            it = req_q.pop_front();
-          end else begin
-            // No matching request captured; still publish result-only item
-            it = gpu_seq_item::type_id::create("result_only",, get_full_name());
-          end
+          gpu_seq_item it = gpu_seq_item::type_id::create("rsp_cap",, get_full_name());
           it.result_s = cfg.result_vif.result_s;
           it.result_v = cfg.result_vif.result_v;
           if ($test$plusargs("GPU_DBG")) begin
             `uvm_info(get_type_name(),
-                      $sformatf("MON: result_s=%h result_v=%h (queue_before=%0d)",
-                                it.result_s, it.result_v, req_q.size()),
+                      $sformatf("MON: result_s=%h result_v=%h",
+                                it.result_s, it.result_v),
                       UVM_HIGH)
           end
-          ap.write(it);
+          rsp_ap.write(it);
         end
       end
     end
