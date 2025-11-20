@@ -30,7 +30,7 @@ jobs:
       fail-fast: false
       matrix:
         tool: [ "questa", "vcs", "xrun" ]
-        test: [ "gpu_base_test", "gpu_mixed_seq", "gpu_random_stress_seq" ]
+        test: [ "gpu_base_test", "gpu_handshake_test", "gpu_mac_stress_test" ]
     defaults:
       run:
         shell: pwsh

@@ -23,7 +23,9 @@ module gpu_shader_core #(
   logic [OPCODE_W-1:0]  opcode_q, opcode_d;
   logic                 is_vector_q, is_vector_d;
   logic [WIDTH-1:0]     a_s_q, b_s_q, c_s_q;
+  logic [WIDTH-1:0]     a_s_d, b_s_d, c_s_d;
   logic [VEC_W-1:0]     a_v_q, b_v_q, c_v_q;
+  logic [VEC_W-1:0]     a_v_d, b_v_d, c_v_d;
 
   // Handshake
   wire can_accept = ~pipe_valid_q;  // empty pipeline
@@ -37,23 +39,23 @@ module gpu_shader_core #(
     pipe_valid_d = pipe_valid_q;
     opcode_d     = opcode_q;
     is_vector_d  = is_vector_q;
-    a_s_q        = a_s_q; // default hold to avoid latches
-    b_s_q        = b_s_q;
-    c_s_q        = c_s_q;
-    a_v_q        = a_v_q;
-    b_v_q        = b_v_q;
-    c_v_q        = c_v_q;
+    a_s_d        = a_s_q;
+    b_s_d        = b_s_q;
+    c_s_d        = c_s_q;
+    a_v_d        = a_v_q;
+    b_v_d        = b_v_q;
+    c_v_d        = c_v_q;
 
     if (fire) begin
       pipe_valid_d = 1'b1;
       opcode_d     = instr_if.opcode;
       is_vector_d  = instr_if.is_vector;
-      a_s_q        = data_if.a_s;
-      b_s_q        = data_if.b_s;
-      c_s_q        = data_if.c_s;
-      a_v_q        = data_if.a_v;
-      b_v_q        = data_if.b_v;
-      c_v_q        = data_if.c_v;
+      a_s_d        = data_if.a_s;
+      b_s_d        = data_if.b_s;
+      c_s_d        = data_if.c_s;
+      a_v_d        = data_if.a_v;
+      b_v_d        = data_if.b_v;
+      c_v_d        = data_if.c_v;
     end else if (result_if.valid & result_if.ready) begin
       pipe_valid_d = 1'b0;
     end
@@ -75,7 +77,12 @@ module gpu_shader_core #(
       pipe_valid_q <= pipe_valid_d;
       opcode_q     <= opcode_d;
       is_vector_q  <= is_vector_d;
-      // data already assigned in comb section via _q nets
+      a_s_q        <= a_s_d;
+      b_s_q        <= b_s_d;
+      c_s_q        <= c_s_d;
+      a_v_q        <= a_v_d;
+      b_v_q        <= b_v_d;
+      c_v_q        <= c_v_d;
     end
   end
 
